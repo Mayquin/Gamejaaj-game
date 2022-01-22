@@ -117,7 +117,10 @@ namespace CMF
 
         void FixedUpdate()
 		{
-			ControllerUpdate();
+			if(!Controlador.controlador.isHiden)
+			{
+				ControllerUpdate();
+			}
 		}
 
 		//Update controller;

@@ -37,6 +37,15 @@ public class FlashLight : MonoBehaviour
                 StartCoroutine(Fail());
             }
         }
+
+        if(Controlador.controlador.isHiden)
+        {
+            lightSource.SetActive(false);
+        }
+        else
+        {
+            lightSource.SetActive(true);
+        }
     }
 
     IEnumerator Fail()
