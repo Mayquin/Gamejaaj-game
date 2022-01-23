@@ -56,7 +56,6 @@ public class Interactable : MonoBehaviour
 
     public virtual void Interact()
     {
-        Debug.Log("Não está dando override");
     }
 
     public virtual void ShowItIsSelected()
