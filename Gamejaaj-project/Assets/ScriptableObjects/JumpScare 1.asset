@@ -10,6 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a912b927c37ba0a4da000803592d3a44, type: 3}
-  m_Name: JumpScare
+  m_Name: JumpScare 1
   m_EditorClassIdentifier: 
-  jumpScareMonster: {fileID: 0}
+  scream: {fileID: 0}
+  jumpCam: {fileID: 4984563234963164908, guid: 99c017b52e6f5f14f84b69713ac38a6d, type: 3}
+  flashImg: {fileID: 4578767356930398930, guid: 475c4e1f562232946af2e84fa4fd6efb, type: 3}
+  endJump: 2
+  spawnMonster: {fileID: 60702943882621493, guid: bc36f0807777bec41983e517230ca67c, type: 3}

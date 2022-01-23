@@ -5,12 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Jump Scare", menuName = "JumpScare")]
 public class JumpScareScriptable : ScriptableObject
 {
-    public GameObject jumpScareMonster;
-    [SerializeField] private AudioSource scream;
-    [SerializeField] private GameObject thePlayer;
-    [SerializeField] private GameObject jumpCam;
-    [SerializeField] private GameObject flashImg;
-    [SerializeField] private float endJump = 2.0f;
-    [SerializeField] private Transform spawnMonster;
+    public AudioSource scream;
+    //public GameObject thePlayer;
+    public GameObject jumpCam;
+    public GameObject flashImg;
+    public float endJump = 2.0f;
+    public Transform spawnMonster;
+
+
 
 }
