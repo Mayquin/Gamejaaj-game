@@ -7,8 +7,8 @@ public class Events : ScriptableObject
 {
     public void ShowCursor()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     public void HideCursor()

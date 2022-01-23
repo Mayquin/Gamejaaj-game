@@ -7,11 +7,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public bool isHiden = false;
     public bool blockInputs = false;
-    public GameObject player;
+    public Transform player;
     public bool dying = false;
     public bool canEnter = false;
     [Header("Events we likely call")]
-    public Event events;
+    public Events events;
     
     void Awake()
     {
@@ -27,6 +27,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        events.HideCursor();   
     }
 }
