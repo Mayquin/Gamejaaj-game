@@ -11,10 +11,13 @@ namespace CMF
         //Mouse input axes;
         public string mouseHorizontalAxis = "Mouse X";
         public string mouseVerticalAxis = "Mouse Y";
+        public string horizontalAxisInput = "Horizontal";
+        public string verticalAxisInput = "Vertical";
 
         //Invert input options;
 		public bool invertHorizontalInput = false;
 		public bool invertVerticalInput = false;
+        public bool useRawInput = true;
 
         //Use this value to fine-tune mouse movement;
         //All mouse input will be multiplied by this value;
@@ -67,5 +70,21 @@ namespace CMF
 
             return _input;
         }
+
+        public override float GetHorizontalAxisInput()
+        {
+            if (useRawInput)
+                return Input.GetAxisRaw(horizontalAxisInput);
+            else
+                return Input.GetAxis(horizontalAxisInput);
+        }
+        public override float GetVerticalAxisInput()
+        {
+            if (useRawInput)
+                return Input.GetAxisRaw(verticalAxisInput);
+            else
+                return Input.GetAxis(verticalAxisInput);
+        }
+        
     }
 }

@@ -78,6 +78,37 @@ namespace CMF
 			HandleCameraRotation();
 		}
 
+		protected virtual void HandleCameraWalking()
+		{
+			if (cameraInput == null)
+				return;
+			
+			// get input values;
+			float _inputHorizontal = cameraInput.GetVerticalAxisInput();
+			float _inputVertical = cameraInput.GetHorizontalAxisInput();
+			
+			TranslateCamera(_inputHorizontal, _inputVertical);
+		}
+
+		protected void TranslateCamera(float _newHorizontalInput, float _newVerticalInput)
+		{
+			if (smoothCameraRotation)
+			{
+				// Lerp input:
+				oldHorizontalInput = Mathf.Lerp (oldHorizontalInput, _newHorizontalInput, Time.deltaTime * cameraSmoothingFactor);
+				oldVerticalInput = Mathf.Lerp (oldVerticalInput, _newVerticalInput, Time.deltaTime * cameraSmoothingFactor);
+			}
+			else
+			{
+				//Replace old input directly;
+				oldHorizontalInput = _newHorizontalInput;
+				oldVerticalInput = _newVerticalInput;
+			}
+			
+			//Add input to camera position;
+
+		}
+		
 		//Get user input and handle camera rotation;
 		//This method can be overridden in classes derived from this base class to modify camera behaviour;
 		protected virtual void HandleCameraRotation()

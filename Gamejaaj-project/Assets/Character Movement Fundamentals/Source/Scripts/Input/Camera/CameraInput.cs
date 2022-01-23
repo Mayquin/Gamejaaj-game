@@ -11,5 +11,8 @@ namespace CMF
     {
         public abstract float GetHorizontalCameraInput();
         public abstract float GetVerticalCameraInput();
+        public abstract float GetHorizontalAxisInput();
+        public abstract float GetVerticalAxisInput();
+
     }
 }
