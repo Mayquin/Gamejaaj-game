@@ -27,6 +27,7 @@ public class FlashLight : MonoBehaviour
                 //clickSound.Play();
                 isOn = true;
                 StartCoroutine(Fail());
+
             }
             else
             {
@@ -36,16 +37,10 @@ public class FlashLight : MonoBehaviour
                 isOn = false;
                 StartCoroutine(Fail());
             }
+
         }
 
-        if(Controlador.controlador.isHiden)
-        {
-            lightSource.SetActive(false);
-        }
-        else
-        {
-            lightSource.SetActive(true);
-        }
+        
     }
 
     IEnumerator Fail()

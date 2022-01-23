@@ -74,7 +74,15 @@ namespace CMF
 
 		[Tooltip("Optional camera transform used for calculating movement direction. If assigned, character movement will take camera view into account.")]
 		public Transform cameraTransform;
-		
+
+
+		void FixedUpdate()
+		{
+				ControllerUpdate();
+			
+		}
+
+
 		//Get references to all necessary components;
 		void Awake () {
 			mover = GetComponent<Mover>();
@@ -115,13 +123,6 @@ namespace CMF
             jumpKeyIsPressed = _newJumpKeyPressedState;
         }
 
-        void FixedUpdate()
-		{
-			if(!Controlador.controlador.isHiden)
-			{
-				ControllerUpdate();
-			}
-		}
 
 		//Update controller;
 		//This function must be called every fixed update, in order for the controller to work correctly;
@@ -187,8 +188,11 @@ namespace CMF
 			//If no camera transform has been assigned, use the character's transform axes to calculate the movement direction;
 			if(cameraTransform == null)
 			{
-				_velocity += tr.right * characterInput.GetHorizontalMovementInput();
-				_velocity += tr.forward * characterInput.GetVerticalMovementInput();
+				if (!Controlador.controlador.isHiden && !Controlador.controlador.dying)
+				{
+					_velocity += tr.right * characterInput.GetHorizontalMovementInput();
+					_velocity += tr.forward * characterInput.GetVerticalMovementInput();
+				}
 			}
 			else
 			{

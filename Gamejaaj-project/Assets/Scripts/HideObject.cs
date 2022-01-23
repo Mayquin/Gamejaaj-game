@@ -8,12 +8,12 @@ public class HideObject : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private string playerTag = "Player";
     [SerializeField] private Transform exitObject;
-    
+    [SerializeField] private GameObject flashLight;
 
 
     public void OnTriggerStay(Collider other)
     {
-        if (playerTag == other.tag && !Controlador.controlador.isHiden)
+        if (playerTag == other.tag && !Controlador.controlador.isHiden && Controlador.controlador.canEnter)
         {
             Hide();
         }
@@ -28,10 +28,10 @@ public class HideObject : MonoBehaviour
     {
         if(Input.GetKeyDown(hideButton))
         {
-            Debug.Log("Hide");
             player.position = transform.position;
             player.rotation = transform.rotation;
 
+            flashLight.SetActive(false);
             Controlador.controlador.isHiden = true;
             Controlador.controlador.blockInputs = true;
         }
@@ -41,10 +41,10 @@ public class HideObject : MonoBehaviour
     {
         if (Input.GetKeyDown(hideButton))
         {
-            Debug.Log("UnHide");
             player.position = exitObject.position;
             player.rotation = exitObject.rotation;
 
+            flashLight.SetActive(true);
             Controlador.controlador.isHiden = false;
             Controlador.controlador.blockInputs = false;
         }
