@@ -4,48 +4,50 @@ using UnityEngine;
 
 public class FlashLight : MonoBehaviour
 {
-   [SerializeField] private bool isOn = false;
+   [SerializeField] private KeyCode lanternButton;
    [SerializeField] private GameObject lightSource;
    [SerializeField] private AudioSource clickSound;
-   [SerializeField] private KeyCode lanternButton;
-   [SerializeField] private bool fail = false;
+   private bool isOn = false;
+   private bool lockedFlashLight = true;
+   private bool inAnimation = false;
+   private Animator animator;
 
-    void Update()
+   void Awake()
+   {
+       animator = GetComponentInChildren<Animator>();
+   }
+
+   void Update()
     {
-        TurnFlashLight();
+        HandleFlashLight();
     }
 
+    public IEnumerator StartAnimGetFlashLight()
+    {
+        inAnimation = true;
+        animator.SetTrigger("GetFlashLight");
+        // animation lenght hardcoded
+        yield return new WaitForSeconds(1f);
+        inAnimation = false;
+        lockedFlashLight = false;
+        lightSource.gameObject.GetComponent<Light>().intensity = 25f;
+    }
+
+    public void HandleFlashLight()
+    {
+        if (inAnimation) return;
+
+        if (lockedFlashLight) return;
+        
+        if (Input.GetKeyDown(lanternButton))
+        {
+            TurnFlashLight();
+        }
+    }
 
     public void TurnFlashLight()
     {
-        if (Input.GetKeyDown(lanternButton))
-        {
-            if(!isOn && !fail)
-            {
-                fail = true;
-                lightSource.SetActive(true);
-                //clickSound.Play();
-                isOn = true;
-                StartCoroutine(Fail());
-
-            }
-            else
-            {
-                fail = true;
-                lightSource.SetActive(false);
-                //clickSound.Play();
-                isOn = false;
-                StartCoroutine(Fail());
-            }
-
-        }
-
-        
-    }
-
-    IEnumerator Fail()
-    {
-        yield return new WaitForSeconds(0.25f);
-        fail = false;
+        isOn = !lightSource.activeSelf;
+        lightSource.SetActive(!lightSource.activeSelf);
     }
 }

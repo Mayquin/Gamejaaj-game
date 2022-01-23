@@ -22,7 +22,7 @@ public class JumpTrigger : MonoBehaviour
         scream.Play();
         //thePlayer.GetComponent<Rigidbody>().velocity = Vector3.zero;
         flashImg.SetActive(true);
-        Controlador.controlador.dying = true;
+        GameManager.instance.dying = true;
         transform.position = spawnMonster.position;
         StartCoroutine(EndJump());
     }
@@ -33,6 +33,6 @@ public class JumpTrigger : MonoBehaviour
        // thePlayer.GetComponent<Rigidbody>().velocity = Vector3.one;
         jumpCam.SetActive(false);
         flashImg.SetActive(false);
-        Controlador.controlador.dying = false;
+        GameManager.instance.dying = false;
     }
 }

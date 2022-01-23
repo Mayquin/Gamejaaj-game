@@ -51,6 +51,16 @@ namespace CMF
             else
                 return _verticalInput *= (-1f);
         }
+
+        public override float GetHorizontalAxisInput()
+        {
+	        throw new System.NotImplementedException();
+        }
+
+        public override float GetVerticalAxisInput()
+        {
+	        throw new System.NotImplementedException();
+        }
     }
 }
 

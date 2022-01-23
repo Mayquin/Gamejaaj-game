@@ -2,51 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HideObject : MonoBehaviour
+public class HideObject : Interactable
 {
-    [SerializeField] private KeyCode hideButton = KeyCode.E;
-    [SerializeField] private Transform player;
-    [SerializeField] private string playerTag = "Player";
-    [SerializeField] private Transform exitObject;
-    [SerializeField] private GameObject flashLight;
-
-
-    public void OnTriggerStay(Collider other)
+    [SerializeField] private Camera myCamera;
+    
+    public override void SetStateOfPlayer()
     {
-        if (playerTag == other.tag && !Controlador.controlador.isHiden && Controlador.controlador.canEnter)
+        playerState.myLifeState = LifeStates.CanHide;
+    }
+    
+    public override void Interact()
+    {
+        if (playerState.myLifeState == LifeStates.CanHide)
         {
             Hide();
+            playerState.SetState(LifeStates.Hided);
         }
-        else if(playerTag == other.tag && Controlador.controlador.isHiden)
+        else if (playerState.myLifeState == LifeStates.Hided)
         {
             UnHide();
+            playerState.SetState(LifeStates.Default);
         }
     }
-
-
+    
     public void Hide()
     {
-        if(Input.GetKeyDown(hideButton))
-        {
-            player.position = transform.position;
-            player.rotation = transform.rotation;
-
-            flashLight.SetActive(false);
-            Controlador.controlador.isHiden = true;
-            Controlador.controlador.blockInputs = true;
-        }
+        myCamera.gameObject.SetActive(true);
+        GameManager.instance.player.gameObject.SetActive(false);
+        GameManager.instance.isHiden = true;
+        GameManager.instance.blockInputs = true;
     }
 
     public void UnHide()
-    {
-        if (Input.GetKeyDown(hideButton))
-        {
-            player.position = exitObject.position;
-            player.rotation = exitObject.rotation;
-
-            flashLight.SetActive(true);
-            Controlador.controlador.isHiden = false;
-            Controlador.controlador.blockInputs = false;
-        }
+    {         
+        GameManager.instance.player.gameObject.SetActive(true);
+        myCamera.gameObject.SetActive(false);
+        GameManager.instance.isHiden = false;
+        GameManager.instance.blockInputs = false;
     }
 }
