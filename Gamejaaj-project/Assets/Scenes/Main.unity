@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 523434229}
   - component: {fileID: 523434228}
   m_Layer: 0
-  m_Name: Controlador
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
