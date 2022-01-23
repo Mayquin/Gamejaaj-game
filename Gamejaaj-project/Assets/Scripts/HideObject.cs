@@ -13,11 +13,11 @@ public class HideObject : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        if (playerTag == other.tag && !Controlador.controlador.isHiden && Controlador.controlador.canEnter)
+        if (playerTag == other.tag && !GameManager.instance.isHiden && GameManager.instance.canEnter)
         {
             Hide();
         }
-        else if(playerTag == other.tag && Controlador.controlador.isHiden)
+        else if(playerTag == other.tag && GameManager.instance.isHiden)
         {
             UnHide();
         }
@@ -32,8 +32,8 @@ public class HideObject : MonoBehaviour
             player.rotation = transform.rotation;
 
             flashLight.SetActive(false);
-            Controlador.controlador.isHiden = true;
-            Controlador.controlador.blockInputs = true;
+            GameManager.instance.isHiden = true;
+            GameManager.instance.blockInputs = true;
         }
     }
 
@@ -45,8 +45,8 @@ public class HideObject : MonoBehaviour
             player.rotation = exitObject.rotation;
 
             flashLight.SetActive(true);
-            Controlador.controlador.isHiden = false;
-            Controlador.controlador.blockInputs = false;
+            GameManager.instance.isHiden = false;
+            GameManager.instance.blockInputs = false;
         }
     }
 }

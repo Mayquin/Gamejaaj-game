@@ -54,11 +54,11 @@ public class SelectionManager : MonoBehaviour
 
                 _selection = selection;
 
-                Controlador.controlador.canEnter = true;
+                GameManager.instance.canEnter = true;
             }
             else
             {
-                Controlador.controlador.canEnter = false;
+                GameManager.instance.canEnter = false;
             }
         }
     }
@@ -72,8 +72,8 @@ public class SelectionManager : MonoBehaviour
             transform.rotation = transform.rotation;
 
             flashLight.SetActive(false);
-            Controlador.controlador.isHiden = true;
-            Controlador.controlador.blockInputs = true;
+            GameManager.instance.isHiden = true;
+            GameManager.instance.blockInputs = true;
         }
 
     }
@@ -86,8 +86,8 @@ public class SelectionManager : MonoBehaviour
             transform.rotation = exitObject.rotation;
 
             flashLight.SetActive(true);
-            Controlador.controlador.isHiden = false;
-            Controlador.controlador.blockInputs = false;
+            GameManager.instance.isHiden = false;
+            GameManager.instance.blockInputs = false;
         }
     }
 }

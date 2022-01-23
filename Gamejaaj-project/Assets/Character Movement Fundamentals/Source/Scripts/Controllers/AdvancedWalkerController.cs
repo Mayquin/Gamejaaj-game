@@ -14,6 +14,7 @@ namespace CMF
 		protected Mover mover;
 		protected CharacterInput characterInput;
 		protected CeilingDetector ceilingDetector;
+		protected PlayerState playerState;
 
         //Jump key variables;
         bool jumpInputIsLocked = false;
@@ -89,6 +90,7 @@ namespace CMF
 			tr = transform;
 			characterInput = GetComponent<CharacterInput>();
 			ceilingDetector = GetComponent<CeilingDetector>();
+			playerState = GetComponent<PlayerState>();
 
 			if(characterInput == null)
 				Debug.LogWarning("No character input script has been attached to this gameobject", this.gameObject);
@@ -188,7 +190,7 @@ namespace CMF
 			//If no camera transform has been assigned, use the character's transform axes to calculate the movement direction;
 			if(cameraTransform == null)
 			{
-				if (!Controlador.controlador.isHiden && !Controlador.controlador.dying)
+				if (!GameManager.instance.isHiden && !GameManager.instance.dying)
 				{
 					_velocity += tr.right * characterInput.GetHorizontalMovementInput();
 					_velocity += tr.forward * characterInput.GetVerticalMovementInput();

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class FlashLight : MonoBehaviour
 {
-   [SerializeField] private bool isOn = false;
+   private bool isOn = false;
+   private bool fail = false;
+   [SerializeField] private KeyCode lanternButton;
    [SerializeField] private GameObject lightSource;
    [SerializeField] private AudioSource clickSound;
-   [SerializeField] private KeyCode lanternButton;
-   [SerializeField] private bool fail = false;
 
     void Update()
     {
@@ -22,7 +22,7 @@ public class FlashLight : MonoBehaviour
         {
             if(!isOn && !fail)
             {
-                fail = true;
+                fail = true; // what would this variable be for ?
                 lightSource.SetActive(true);
                 //clickSound.Play();
                 isOn = true;
@@ -31,7 +31,7 @@ public class FlashLight : MonoBehaviour
             }
             else
             {
-                fail = true;
+                fail = true; 
                 lightSource.SetActive(false);
                 //clickSound.Play();
                 isOn = false;
