@@ -16,11 +16,10 @@ public class JumpTrigger : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other)
+    void JumpTriggerActivate()
     {
         jumpCam.SetActive(true);
         scream.Play();
-        //thePlayer.GetComponent<Rigidbody>().velocity = Vector3.zero;
         flashImg.SetActive(true);
         GameManager.instance.dying = true;
         transform.position = spawnMonster.position;
@@ -30,7 +29,6 @@ public class JumpTrigger : MonoBehaviour
     IEnumerator EndJump()
     {
         yield return new WaitForSeconds(endJump);
-       // thePlayer.GetComponent<Rigidbody>().velocity = Vector3.one;
         jumpCam.SetActive(false);
         flashImg.SetActive(false);
         GameManager.instance.dying = false;

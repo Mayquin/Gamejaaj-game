@@ -17,15 +17,12 @@ public class JumpScare : MonoBehaviour
         transform.position = jumpScare.spawnMonster.position;
         StartCoroutine(EndJump());
     }
-
-
     public void Instance()
     {
         Instantiate(jumpScare.jumpCam);
         Instantiate(jumpScare.flashImg);
        
     }
-
     IEnumerator EndJump()
     {
         yield return new WaitForSeconds(jumpScare.endJump);
