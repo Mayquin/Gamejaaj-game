@@ -18,13 +18,12 @@ public class JumpActivate : MonoBehaviour
     void Scare()
     {
         if (scare) return;
+        
         jumpIndex = Random.Range(0, jumpScare.Length);
-
         if (Vector3.Distance(transform.position, player.position) < distanceToPlayer)
         {
-            jumpScare[jumpIndex].JumpScareActivate();
-
             scare = true;
+            jumpScare[jumpIndex].JumpScareActivate();
         }
     }
 }
