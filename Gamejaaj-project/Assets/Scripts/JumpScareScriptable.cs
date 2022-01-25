@@ -7,7 +7,6 @@ public class JumpScareScriptable : ScriptableObject
 {
     public AudioSource scream;
     public GameObject jumpCam;
-    public GameObject flashImg;
     public float endJump = 2.0f;
-    public Transform spawnMonster;
+    
 }

@@ -2,32 +2,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpScare : MonoBehaviour
+public class JumpScare : Interactable
 {
     public JumpScareScriptable jumpScare;
+    [SerializeField] protected Transform player;
+    [SerializeField] protected float distanceToPlayer = 3f;
+    [SerializeField] protected List<JumpScare> jumpscare;
+    [SerializeField] protected int jumpIndex;
+    [SerializeField] protected float contTime = 5f;
+    bool scare = false;
+    bool interact = false;
+    float restTime;
+   
+    private void Update()
+    {
+        if(playerState.myLifeState != LifeStates.Hided)
+        RestTimeJumpScare();
+    }
 
+    public override void Interact()
+    {
+        interact = true;
+        if(interact)
+        Scare();
+    }
+    public void RestTimeJumpScare()
+    {
+        interact = false;
+        if(Time.time > restTime)
+        {
+            restTime = contTime + Time.deltaTime;
+            Scare();
+        }
+
+    }
+
+    void Scare()
+    {
+        if (scare) return;
+        jumpIndex = Random.Range(0, jumpscare.Count);
+
+        if (Vector3.Distance(transform.position, player.position) < distanceToPlayer)
+        {
+            scare = true;
+            jumpscare[jumpIndex].JumpScareActivate();
+        }
+    }
 
     public void JumpScareActivate()
     {
         Instance();
         jumpScare.jumpCam.SetActive(true);
         jumpScare.scream.Play();
-        jumpScare.flashImg.SetActive(true);
         GameManager.instance.dying = true;
-        transform.position = jumpScare.spawnMonster.position;
         StartCoroutine(EndJump());
     }
     public void Instance()
     {
-        Instantiate(jumpScare.jumpCam);
-        Instantiate(jumpScare.flashImg);
-       
+        Instantiate(jumpScare.jumpCam); 
     }
     IEnumerator EndJump()
     {
         yield return new WaitForSeconds(jumpScare.endJump);
         jumpScare.jumpCam.SetActive(false);
-        jumpScare.flashImg.SetActive(false);
         GameManager.instance.dying = false;
     }
 
