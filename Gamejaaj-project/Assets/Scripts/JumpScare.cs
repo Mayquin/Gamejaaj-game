@@ -20,6 +20,7 @@ public class JumpScare : Interactable
         RestTimeJumpScare();
     }
 
+    
     public override void Interact()
     {
         interact = true;
